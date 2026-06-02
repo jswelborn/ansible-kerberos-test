@@ -4,9 +4,14 @@
   gather_facts: true
 
   tasks:
+    - name: Show injected domain join user
+      ansible.builtin.debug:
+        msg: "domain_join_user is {{ domain_join_user | default('UNDEFINED') }}"
+
     - name: Show hostname
       ansible.windows.win_shell: hostname
       register: host
 
-    - debug:
+    - name: Display hostname
+      ansible.builtin.debug:
         var: host.stdout
