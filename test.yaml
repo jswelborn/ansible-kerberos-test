@@ -1,12 +1,11 @@
 ---
-- name: Test Kerberos EE
-  hosts: localhost
+- name: Show Windows connection vars
+  hosts: all
   gather_facts: false
 
   tasks:
-    - name: Show krb5.conf
-      command: cat /etc/krb5.conf
-      register: krb
-
     - debug:
-        var: krb.stdout_lines
+        msg:
+          inventory_hostname: "{{ inventory_hostname }}"
+          ansible_host: "{{ ansible_host | default('undefined') }}"
+          ansible_user: "{{ ansible_user | default('undefined') }}"
