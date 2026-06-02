@@ -1,0 +1,12 @@
+---
+- name: Test Kerberos EE
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Show krb5.conf
+      command: cat /etc/krb5.conf
+      register: krb
+
+    - debug:
+        var: krb.stdout_lines
