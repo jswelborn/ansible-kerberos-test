@@ -1,11 +1,12 @@
 ---
-- name: Show Windows connection vars
+- name: Test Kerberos WinRM
   hosts: all
-  gather_facts: false
+  gather_facts: true
 
   tasks:
+    - name: Show hostname
+      ansible.windows.win_shell: hostname
+      register: host
+
     - debug:
-        msg:
-          inventory_hostname: "{{ inventory_hostname }}"
-          ansible_host: "{{ ansible_host | default('undefined') }}"
-          ansible_user: "{{ ansible_user | default('undefined') }}"
+        var: host.stdout
